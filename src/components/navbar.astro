@@ -1,0 +1,52 @@
+---
+const site = {
+  baseurl: "https://grandbastion.dev",
+};
+---
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="#">
+      <h1>GB</h1>
+    </a>
+    <a
+      role="button"
+      class="navbar-burger burger"
+      aria-label="menu"
+      aria-expanded="false"
+      data-target="main-navbar"
+    >
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+    <div id="main-navbar" class="navbar-menu">
+      <div class="navbar-start">
+        <a class="navbar-item" href="#about"> Home</a>
+        <a class="navbar-item" href="#about"> About me</a>
+        <a class="navbar-item" href="#projects"> Projects</a>
+        <a class="navbar-item" href="#contact"> Contact</a>
+        <a class="navbar-item" href={ site.baseurl.concat("/blog") }> Blog</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const $navbarBurgers = Array.prototype.slice.call(
+      document.querySelectorAll(".navbar-burger"),
+      0
+    );
+    if ($navbarBurgers.length > 0) {
+      $navbarBurgers.forEach((el) => {
+        el.addEventListener("click", () => {
+          const target = el.dataset.target;
+          const $target = document.getElementById(target);
+          el.classList.toggle("is-active");
+          $target?.classList.toggle("is-active");
+        });
+      });
+    }
+  });
+</script>

@@ -1,0 +1,53 @@
+---
+import { Image } from "astro:assets";
+
+import Layout from "../layouts/Layout.astro";
+import NavBar from "../components/navbar.astro";
+import AboutMe from "../components/about-me.astro";
+import bastionLogo from "../static/images/bastion.jpg";
+import bastionLogoChristmas from "../static/images/bastion_christmas.jpg";
+const isChristmas = new Date().getMonth() === 11;
+---
+
+<Layout title="GrandBastion">
+  <main>
+    <NavBar />
+    <section class="section">
+      <div class="container">
+        <h1 class="title">GrandBastion</h1>
+        <p class="subtitle">
+          The easy part, start. The hard part, keep going.
+        </p>
+        {
+          isChristmas ? (
+            <Image src={bastionLogoChristmas} alt="Bastion Logo" />
+          ) : (
+            <Image src={bastionLogo} alt="Bastion Logo" />
+          )
+        }
+      </div>
+    </section>
+    <AboutMe />
+  </main>
+</Layout>
+
+<script>
+  const isChristmas = new Date().getMonth() === 11;
+  if (isChristmas) {
+    const tree = String.raw`%c
+             *            
+            /|\                  
+           /*|O\           
+          /*/|\*\          
+         /X/O|*\X\         
+        /*/X/|\X\*\        
+       /O/*/X|*\O\X\              
+      /*/O/X/|\X\O\*\      
+     /X/O/*/X|O\X\*\O\     
+    /O/X/*/O/|\X\*\O\X\    
+            |X|            
+            |X|            
+  `;
+    console.log(tree, "font-family:monospace;color: green;");
+  }
+</script>
