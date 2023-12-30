@@ -7,7 +7,9 @@
       "request": "launch",
       "type": "node-terminal",
       "env": {
-        "G_PERSONAL_TOKEN": "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",
+        "G_APP_ID": "758386",
+        "G_CLIENT_ID": "Iv1.17ebe2f7a7cbe1db",
+        "G_PRIVATE_KEY": "6e5fa66dd0192f7b0e4e57d2ad5c00ae9afb5819",
       },
     },
   ]
