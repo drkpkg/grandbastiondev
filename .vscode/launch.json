@@ -6,11 +6,6 @@
       "name": "Development server",
       "request": "launch",
       "type": "node-terminal",
-      "env": {
-        "G_APP_ID": "758386",
-        "G_CLIENT_ID": "Iv1.17ebe2f7a7cbe1db",
-        "G_PRIVATE_KEY": "6e5fa66dd0192f7b0e4e57d2ad5c00ae9afb5819",
-      },
     },
   ]
 }
