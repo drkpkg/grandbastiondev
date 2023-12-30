@@ -7,7 +7,7 @@
       "request": "launch",
       "type": "node-terminal",
       "env": {
-        "GITHUB_PERSONAL_TOKEN": "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",
+        "GITHUB_PERSONAL_TOKEN": "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",
       },
     },
   ]
