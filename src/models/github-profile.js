@@ -77,9 +77,8 @@ export default class GithubProfileModel {
 
     toJson() {
         return {
-            // avatar_url: this.avatarUrl,
             name: this.name,
-            url: this.url,
+            url: this.htmlUrl,
             company: this.company,
             blog: this.blog,
             location: this.location,
