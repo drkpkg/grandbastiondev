@@ -1,7 +1,7 @@
 export async function getProfile(params, request) {
     // get information from my github profile
     try {
-        const githubPersonalToken = process.env.GITHUB_PERSONAL_TOKEN;
+        const githubPersonalToken = process.env.G_PERSONAL_TOKEN;
         const profileResponse = await fetch("https://api.github.com/users/drkpkg", {
             headers: {
                 Authorization: `token ${githubPersonalToken}`,
