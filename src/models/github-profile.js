@@ -82,7 +82,7 @@ export default class GithubProfileModel {
             company: this.company,
             blog: this.blog,
             location: this.location,
-            email: this.email,
+            email: this.email ?? "",
             hireable: this.hireable,
             bio: this.bio,
             twitter_username: this.twitterUsername,

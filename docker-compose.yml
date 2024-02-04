@@ -8,3 +8,4 @@ services:
       target: runtime
     ports:
       - "5000:4321"
+    restart: always

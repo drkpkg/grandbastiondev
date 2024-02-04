@@ -23,10 +23,11 @@
     "agnostic-astro": "^0.0.10",
     "astro": "^4.0.7",
     "bulma": "^0.9.4",
+    "domhandler": "^5.0.3",
     "flag-icons": "^7.1.0",
+    "node-html-parser": "^6.1.12",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "typescript": "^5.3.3",
-    "octokit": "^3.1.2"
+    "typescript": "^5.3.3"
   }
 }
