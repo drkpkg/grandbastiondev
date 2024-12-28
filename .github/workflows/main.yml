@@ -10,10 +10,10 @@ jobs:
   run_pull:
     name: Pull from Github
     runs-on: ubuntu-latest
-
     steps:
       - name: Install ssh key
         run: |
+            mkdir -p ~/.ssh
             echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
             ssh-keyscan -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
       - name: Connect and pull
