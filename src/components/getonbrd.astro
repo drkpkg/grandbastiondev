@@ -1,0 +1,33 @@
+---
+import { parse } from "node-html-parser";
+
+let myProfileUrl = "https://www.getonbrd.com/p/felix-daniel-coca-calvimontes";
+let response = await fetch(myProfileUrl);
+let responseHtml = await response.text();
+let root = parse(responseHtml);
+let header = root.getElementsByTagName("head")?.toString();
+let profileDiv = root
+  .getElementsByTagName("div")
+  .find((div) => div.attributes.class === "full-height flex-grow1")
+  ?.toString();
+---
+
+<Fragment>
+  <!-- button link to show my-profile -->
+  <button id="my-profile-button" class="button button--primary button--small">
+    <span class="button__text">My getonbrd profile</span>
+  </button>
+  <section id="my-profile" class="section hidden">
+    <Fragment set:html={header} />
+    <Fragment set:html={profileDiv} />
+  </section>
+</Fragment>
+<script>
+  const sectionMyProfile = document.getElementById("my-profile");
+  const buttonMyProfile = document.getElementById("my-profile-button");
+  buttonMyProfile?.addEventListener("click", (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    sectionMyProfile?.classList.toggle("hidden");
+  });
+</script>
