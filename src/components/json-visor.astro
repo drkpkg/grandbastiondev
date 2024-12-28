@@ -2,7 +2,7 @@
 import GithubProfileModel from "../models/github-profile.js";
 import { getProfile } from "../pages/api/profile";
 import { JsonViewer } from "@textea/json-viewer";
-const { id, data } = Astro.props;
+const { id } = Astro.props;
 let githubProfile = new GithubProfileModel();
 const response = await getProfile();
 const responseData = await response.json();

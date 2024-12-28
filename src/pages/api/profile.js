@@ -1,4 +1,4 @@
-export async function getProfile(params, request) {
+export async function getProfile() {
     // get information from my github profile
     try {
         const profileResponse = await fetch("https://api.github.com/users/drkpkg");
