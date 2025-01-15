@@ -7,15 +7,6 @@ let githubProfile = new GithubProfileModel();
 const response = await getProfile();
 const responseData = await response.json();
 githubProfile = GithubProfileModel.fromJson(responseData);
-githubProfile.addKey("skills", {
-  frameworks: {
-    frontend: ["Angular", "Astro"],
-    backend: ["Ruby on rails", "Flask", "FastApi", "Spring Boot"],
-  },
-  languages: ["Javascript", "Typescript", "Python", "Java", "Ruby"],
-  databases: ["PostgreSQL", "MySQL", "Redis"],
-  others: ["Docker", "Kubernetes", "Git", "Jenkins", "Microservices", "Azure"],
-});
 ---
 
 <div id={id} class="columns">

@@ -1,0 +1,28 @@
+---
+const projectList = [
+    {
+        title: "Constrictor",
+        description: "A simple and lightweight Flask boilerplate to start your projects.",
+        link: "https://github.com/drkpkg/constrictor"
+    },  
+]
+---
+<section id="projects" class="section">
+    <h3 class="title">Projects</h3>
+    <div class="columns is-multiline">
+        {
+            projectList.map((project) => (
+                <div class="column is-4">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="content">
+                                <h4 class="title is-4">{project.title}</h4>
+                                <p>{project.description}</p>
+                                <a href={project.link} target="_blank" rel="noopener noreferrer">View on GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            ))
+        }
+    </div>

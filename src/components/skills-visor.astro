@@ -1,0 +1,182 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+const url = "https://asset.grandbastion.dev"
+let skills = {
+    consulting: [
+        {
+            name: "Open Source Initiative",
+            altName: "OSI",
+            image: "opensourceinitiative.svg",
+        },
+        {
+            name: "Odoo",
+            altName: "Odoo",
+            image: "odoo.svg",
+        },
+    ],
+    frameworks: {
+        frontend: [
+            {
+                name: "Angular",
+                altName: "Angular",
+                image: "angular.svg",
+            },
+            {
+                name: "Astro",
+                altName: "Astro",
+                image: "astro.svg",
+            },
+        ],
+        backend: [
+            {
+                name: "Ruby on Rails",
+                altName: "Rails",
+                image: "rubyonrails.svg",
+            },
+            {
+                name: "Flask",
+                altName: "Flask",
+                image: "flask.svg",
+            },
+            {
+                name: "FastApi",
+                altName: "FastApi",
+                image: "fastapi.svg",
+            },
+            {
+                name: "Spring Boot",
+                altName: "Spring Boot",
+                image: "springboot.svg",
+            },
+        ],
+    },
+    languages: [
+        {
+            name: "Javascript",
+            altName: "JS",
+            image: "javascript.svg",
+        },
+        {
+            name: "Typescript",
+            altName: "TS",
+            image: "typescript.svg",
+        },
+        {
+            name: "Python",
+            altName: "Python",
+            image: "python.svg",
+        },
+        {
+            name: "Java",
+            altName: "Java",
+            image: "java.svg",
+        },
+        {
+            name: "Ruby",
+            altName: "Ruby",
+            image: "ruby.svg",
+        },
+        {
+            name: "Rust",
+            altName: "Rust",
+            image: "rust.svg",
+        },
+    ],
+    databases: [
+        {
+            name: "PostgreSQL",
+            altName: "PostgreSQL",
+            image: "postgresql.svg",
+        },
+        {
+            name: "MySQL",
+            altName: "MySQL",
+            image: "mysql.svg",
+        },
+        {
+            name: "Redis",
+            altName: "Redis",
+            image: "redis.svg",
+        },
+    ],
+    containers: [
+        {
+            name: "Docker",
+            altName: "Docker",
+            image: "docker.svg",
+        },
+        {
+            name: "Kubernetes",
+            altName: "Kubernetes",
+            image: "kubernetes.svg",
+        },
+    ],
+};
+---
+
+<section class="skills-visor">
+    <h2>Consulting</h2>
+    <div class="skills-visor__container">
+        {
+            skills.consulting.map((item) => {
+                return (
+                    <div class="skills-visor__item">
+                        {/* https://grandbastion.dev/ */}
+                        <img src=`${url}/$item.image` alt={item.name} />
+                        <span>{item.name}</span>
+                    </div>
+                );
+            })
+        }
+    </div>
+    <hr />
+    <h2>Technologies</h2>
+    <div class="skills-visor__container">
+        <div class="skills-visor__category">
+            <h3>Frontend frameworks</h3>
+            {
+                skills.frameworks.frontend.map((item) => {
+                    return (
+                        <div class="skills-visor__item">
+                            <img src=`${url}/$item.image` alt={item.name} />
+                            <span>{item.name}</span>
+                        </div>
+                    );
+                })
+            }
+        </div>
+    </div>
+    <hr />
+    <div class="skills-visor__category">
+        <h3>Backend frameworks</h3>
+        <div class="skills-visor__items">
+            {
+                skills.frameworks.backend.map((item) => {
+                    return (
+                        <div class="skills-visor__item">
+                            <img src=`${url}/$item.image` alt={item.name} />
+                            <span>{item.name}</span>
+                        </div>
+                    );
+                })
+            }
+        </div>
+    </div>
+    <div class="skills-visor__category">
+        <h3>Databases</h3>
+        <div class="skills-visor__items">
+            {
+                skills.databases.map((item) => {
+                    return (
+                        <div class="skills-visor__item">
+                            <img src=`${url}/$item.image` alt={item.name} />
+                            <span>{item.name}</span>
+                        </div>
+                    );
+                })
+            }
+        </div>
+    </div>
+</section>

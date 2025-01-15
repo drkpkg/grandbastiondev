@@ -88,7 +88,6 @@ export default class GithubProfileModel {
             twitter_username: this.twitterUsername,
             public_repos: this.publicRepos,
             public_gists: this.publicGists,
-            skills: this.skills,
         };
     }
 }

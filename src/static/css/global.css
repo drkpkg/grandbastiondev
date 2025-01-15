@@ -1,0 +1,25 @@
+.skills-visor__category {
+    display: flex;
+    flex-direction: column; /* Mantén las categorías apiladas */
+    align-items: center; /* Centra las categorías horizontalmente */
+    width: 100%; /* Asegúrate de que ocupe todo el ancho */
+}
+
+.skills-visor__items {
+    display: flex; /* Asegura que los elementos estén en línea */
+    flex-wrap: wrap; /* Permite que los elementos salten de línea si no caben */
+    justify-content: center; /* Centra los elementos dentro del contenedor */
+    gap: 20px; /* Añade espacio entre los elementos */
+    margin-top: 10px; /* Reduce el espacio superior */
+    padding: 0;
+    width: 100%; /* Asegúrate de que ocupe todo el ancho */
+}
+
+.skills-visor__item {
+    display: flex;
+    flex-direction: row; /* Elementos alineados horizontalmente */
+    justify-content: center; /* Centra los elementos internamente */
+    align-items: center;
+    width: auto; /* Elimina el ancho fijo */
+    gap: 10px; /* Espacio entre el ícono y el texto */
+}
