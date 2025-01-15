@@ -9,6 +9,7 @@ import bastionLogo from "../static/images/bastion.jpg";
 import bastionLogoChristmas from "../static/images/bastion_christmas.jpg";
 import Getonbrd from "../components/getonbrd.astro";
 import Projects from "../components/projects.astro";
+import Contact from "../components/contact.astro";
 const isChristmas = new Date().getMonth() === 11;
 ---
 
@@ -50,11 +51,14 @@ const isChristmas = new Date().getMonth() === 11;
               <h5 class="title">GrandBastion</h5>
               <Getonbrd />
             </div>
-            <h6 class="subtitle">The easy part, start. The hard part, keep going.</h6>
+            <h6 class="subtitle">
+              The easy part, start. The hard part, keep going.
+            </h6>
           </div>
         </div>
         <AboutMe />
         <Projects />
+        <Contact />
       </div>
     </section>
   </main>

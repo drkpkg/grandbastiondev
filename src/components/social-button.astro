@@ -1,0 +1,11 @@
+---
+const { iconUrl, text, href, blank = true } = Astro.props;
+console.log(iconUrl, text, href, blank);
+---
+
+<div class="social-button">
+  <a href={href} target={blank ? "_blank" : "_self"} rel="noopener noreferrer">
+    <img src={iconUrl} alt={text} />
+    <span>{text}</span>
+  </a>
+</div>

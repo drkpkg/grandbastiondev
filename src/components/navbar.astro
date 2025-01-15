@@ -1,4 +1,6 @@
 ---
+import { ThemeSwitch } from "free-astro-components";
+
 const site = {
   baseurl: "https://grandbastion.dev",
 };
@@ -26,7 +28,7 @@ const site = {
         <a class="navbar-item" href="#about"> About me</a>
         <a class="navbar-item" href="#projects"> Projects</a>
         <a class="navbar-item" href="#contact"> Contact</a>
-        <a class="navbar-item" href={ site.baseurl.concat("/blog") }> Blog</a>
+        <!-- <a class="navbar-item" href={site.baseurl.concat("/blog")}> Blog</a> -->
       </div>
     </div>
   </div>
@@ -36,7 +38,7 @@ const site = {
   document.addEventListener("DOMContentLoaded", () => {
     const $navbarBurgers = Array.prototype.slice.call(
       document.querySelectorAll(".navbar-burger"),
-      0
+      0,
     );
     if ($navbarBurgers.length > 0) {
       $navbarBurgers.forEach((el) => {

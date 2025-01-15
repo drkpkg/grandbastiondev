@@ -1,44 +1,29 @@
 ---
-import { parse } from "node-html-parser";
-import {
-  Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-} from "free-astro-components";
-import Icon from "https://asset.grandbastion.dev/getonbrd.svg";
-
 let myProfileUrl = "https://www.getonbrd.com/p/felix-daniel-coca-calvimontes";
-let response = await fetch(myProfileUrl);
-let responseHtml = await response.text();
-let root = parse(responseHtml);
-let header = root.getElementsByTagName("head")?.toString();
-let profileDiv = root
-  .getElementsByTagName("div")
-  .find((div) => div.attributes.class === "full-height flex-grow1")
-  ?.toString();
 ---
 
-<Fragment>
-  <!-- button link to show my-profile -->
-  <!-- <Button id="my-profile-button" data-modal-trigger="my-profile" icon=>
-   
-  </Button> -->
-  <img
-    src="https://asset.grandbastion.dev/getonbrd.svg"
-    alt="Get on Board"
-    title="Check my profile on Get on Board"
-    class="cursor-pointer"
-    data-modal-trigger="my-profile"
-  />
-  <Modal id="my-profile" size="full">
-    <ModalBody>
-      <Fragment set:html={header} />
-      <Fragment set:html={profileDiv} />
-    </ModalBody>
-    <ModalFooter>
-      <Button label="Close" data-modal-close />
-    </ModalFooter>
-  </Modal>
-</Fragment>
+<div>
+  <a href={myProfileUrl} target="_blank" rel="noopener noreferrer">
+    <img
+      src="https://asset.grandbastion.dev/getonbrd.svg"
+      alt="Get on Board"
+      title="Check my profile on Get on Board"
+      class="cursor-pointer shake-effect"
+    />
+  </a>
+</div>
+
+<script>
+  function triggerShake(element: any) {
+    element.classList.add("shake-active");
+    setTimeout(() => {
+      element.classList.remove("shake-active"); // Remove the class after the animation duration
+    }, 600); // Match the duration of the shake animation (0.6s)
+  }
+  document.addEventListener("DOMContentLoaded", () => {
+    let shakeElements = document.querySelectorAll(".shake-effect");
+    setInterval(() => {
+      shakeElements.forEach((element) => triggerShake(element));
+    }, 10000);
+  });
+</script>
