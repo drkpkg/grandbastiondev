@@ -1,5 +1,13 @@
 ---
 import { parse } from "node-html-parser";
+import {
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+} from "free-astro-components";
+import Icon from "https://asset.grandbastion.dev/getonbrd.svg";
 
 let myProfileUrl = "https://www.getonbrd.com/p/felix-daniel-coca-calvimontes";
 let response = await fetch(myProfileUrl);
@@ -14,20 +22,23 @@ let profileDiv = root
 
 <Fragment>
   <!-- button link to show my-profile -->
-  <button id="my-profile-button" class="button button--primary button--small">
-    <span class="button__text">My getonbrd profile</span>
-  </button>
-  <section id="my-profile" class="section hidden">
-    <Fragment set:html={header} />
-    <Fragment set:html={profileDiv} />
-  </section>
+  <!-- <Button id="my-profile-button" data-modal-trigger="my-profile" icon=>
+   
+  </Button> -->
+  <img
+    src="https://asset.grandbastion.dev/getonbrd.svg"
+    alt="Get on Board"
+    title="Check my profile on Get on Board"
+    class="cursor-pointer"
+    data-modal-trigger="my-profile"
+  />
+  <Modal id="my-profile" size="full">
+    <ModalBody>
+      <Fragment set:html={header} />
+      <Fragment set:html={profileDiv} />
+    </ModalBody>
+    <ModalFooter>
+      <Button label="Close" data-modal-close />
+    </ModalFooter>
+  </Modal>
 </Fragment>
-<script>
-  const sectionMyProfile = document.getElementById("my-profile");
-  const buttonMyProfile = document.getElementById("my-profile-button");
-  buttonMyProfile?.addEventListener("click", (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    sectionMyProfile?.classList.toggle("hidden");
-  });
-</script>

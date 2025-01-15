@@ -1,3 +1,16 @@
+.title-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    margin-bottom: 20px;
+
+    img {
+        width: 24px;
+        height: 24px;
+    }
+}
+
 .skills-visor__category {
     display: flex;
     flex-direction: column; /* Mantén las categorías apiladas */
@@ -17,9 +30,19 @@
 
 .skills-visor__item {
     display: flex;
-    flex-direction: row; /* Elementos alineados horizontalmente */
+    flex-direction: column; /* Elementos alineados horizontalmente */
     justify-content: center; /* Centra los elementos internamente */
     align-items: center;
     width: auto; /* Elimina el ancho fijo */
-    gap: 10px; /* Espacio entre el ícono y el texto */
+    gap: 10px; /* Espacio entre el ícono y el texto */;
+
+    img {
+        width: 96px;
+        height: 96px;
+    }
+
+    span {
+        font-size: 0.8rem; /* Reduce el tamaño del texto */
+        text-align: center; /* Centra el texto */
+    }
 }

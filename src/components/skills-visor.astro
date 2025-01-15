@@ -101,7 +101,7 @@ let skills = {
             image: "redis.svg",
         },
     ],
-    containers: [
+    infrastructure: [
         {
             name: "Docker",
             altName: "Docker",
@@ -112,35 +112,34 @@ let skills = {
             altName: "Kubernetes",
             image: "kubernetes.svg",
         },
+        {
+            name: "Bare Metal",
+            altName: "Bare Metal",
+            image: "baremetal.svg",
+        },
+        {
+            name: "Nginx",
+            altName: "Nginx",
+            image: "nginx.svg",
+        },
+        {
+            name: "Traefik",
+            altName: "Traefik",
+            image: "traefikproxy.svg",
+        },
     ],
 };
 ---
 
 <section class="skills-visor">
-    <h2>Consulting</h2>
-    <div class="skills-visor__container">
-        {
-            skills.consulting.map((item) => {
-                return (
-                    <div class="skills-visor__item">
-                        {/* https://grandbastion.dev/ */}
-                        <img src=`${url}/$item.image` alt={item.name} />
-                        <span>{item.name}</span>
-                    </div>
-                );
-            })
-        }
-    </div>
-    <hr />
-    <h2>Technologies</h2>
-    <div class="skills-visor__container">
-        <div class="skills-visor__category">
-            <h3>Frontend frameworks</h3>
+    <div class="skills-visor__category">
+        <h3>Consulting</h3>
+        <div class="skills-visor__items">
             {
-                skills.frameworks.frontend.map((item) => {
+                skills.consulting.map((item) => {
                     return (
                         <div class="skills-visor__item">
-                            <img src=`${url}/$item.image` alt={item.name} />
+                            <img src=`${url}/${item.image}` alt={item.name} />
                             <span>{item.name}</span>
                         </div>
                     );
@@ -150,13 +149,13 @@ let skills = {
     </div>
     <hr />
     <div class="skills-visor__category">
-        <h3>Backend frameworks</h3>
+        <h3>Frontend</h3>
         <div class="skills-visor__items">
             {
-                skills.frameworks.backend.map((item) => {
+                skills.frameworks.frontend.map((item) => {
                     return (
                         <div class="skills-visor__item">
-                            <img src=`${url}/$item.image` alt={item.name} />
+                            <img src=`${url}/${item.image}` alt={item.name} />
                             <span>{item.name}</span>
                         </div>
                     );
@@ -164,6 +163,23 @@ let skills = {
             }
         </div>
     </div>
+    <hr />
+    <div class="skills-visor__category">
+        <h3>Backend</h3>
+        <div class="skills-visor__items">
+            {
+                skills.frameworks.backend.map((item) => {
+                    return (
+                        <div class="skills-visor__item">
+                            <img src=`${url}/${item.image}` alt={item.name} />
+                            <span>{item.name}</span>
+                        </div>
+                    );
+                })
+            }
+        </div>
+    </div>
+    <hr />
     <div class="skills-visor__category">
         <h3>Databases</h3>
         <div class="skills-visor__items">
@@ -171,7 +187,23 @@ let skills = {
                 skills.databases.map((item) => {
                     return (
                         <div class="skills-visor__item">
-                            <img src=`${url}/$item.image` alt={item.name} />
+                            <img src=`${url}/${item.image}` alt={item.name} />
+                            <span>{item.name}</span>
+                        </div>
+                    );
+                })
+            }
+        </div>
+    </div>
+    <hr />
+    <div class="skills-visor__category">
+        <h3>Infrastructure</h3>
+        <div class="skills-visor__items">
+            {
+                skills.infrastructure.map((item) => {
+                    return (
+                        <div class="skills-visor__item">
+                            <img src=`${url}/${item.image}` alt={item.name} />
                             <span>{item.name}</span>
                         </div>
                     );
