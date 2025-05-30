@@ -1,11 +1,15 @@
-version: '3.8'
-
 services:
-  app:
+  grandbastion:
+    container_name: grandbastion
     image: grandbastion:latest
     build:
       context: .
       target: runtime
-    ports:
-      - "5000:4321"
+    #ports:
+    #  - "5000:4321"
     restart: always
+    networks:
+       - traefik-external-net
+networks:
+  traefik-external-net:
+    external: true
