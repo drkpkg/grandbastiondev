@@ -1,15 +1,15 @@
 ---
 import SocialButton from './social-button.astro';
+import { t } from "../i18n/translations.js";
 ---
 
 <section id="contact" class="section">
     <div class="container">
         <div class="columns">
             <div class="column">
-                <h2 class="title">Contact</h2>
-                <p>
-                    I'm always open to new opportunities and collaborations.
-                    Feel free to reach out to me via email or LinkedIn.
+                <h2 class="title" data-i18n="contact.title">{t("contact.title")}</h2>
+                <p data-i18n="contact.description">
+                    {t("contact.description")}
                 </p>
                 <div class="columns">
                     <div class="column">
