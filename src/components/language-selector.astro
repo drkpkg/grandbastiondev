@@ -1,0 +1,247 @@
+---
+// Fancy language selector with client-side translation switching
+---
+
+<!-- Fancy language selector with flags and modern styling -->
+
+<div class="language-selector">
+  <div class="language-selector__container">
+    <div class="language-selector__current" id="current-lang">
+      <span class="language-selector__flag fi fi-gb"></span>
+      <span class="language-selector__text">EN</span>
+      <span class="language-selector__arrow">▼</span>
+    </div>
+    <div class="language-selector__dropdown" id="lang-dropdown">
+      <div class="language-selector__option" data-lang="en">
+        <span class="language-selector__flag fi fi-gb"></span>
+        <span class="language-selector__text">English</span>
+      </div>
+      <div class="language-selector__option" data-lang="es">
+        <span class="language-selector__flag fi fi-es"></span>
+        <span class="language-selector__text">Español</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .language-selector {
+    position: relative;
+    display: inline-block;
+  }
+
+  .language-selector__container {
+    position: relative;
+  }
+
+  .language-selector__current {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #dbdbdb;
+    border-radius: 0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 80px;
+    justify-content: center;
+  }
+
+  .language-selector__current:hover {
+    background: transparent;
+    border-bottom-color: #b5b5b5;
+  }
+
+  .language-selector__current.active {
+    background: transparent;
+    border-bottom-color: #3273dc;
+    color: #3273dc;
+  }
+
+  .language-selector__flag {
+    font-size: 16px;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .language-selector__text {
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .language-selector__arrow {
+    font-size: 10px;
+    transition: transform 0.2s ease;
+  }
+
+  .language-selector__current.active .language-selector__arrow {
+    transform: rotate(180deg);
+  }
+
+  .language-selector__dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: none;
+    border-bottom: 1px solid #dbdbdb;
+    border-radius: 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s ease;
+    z-index: 1000;
+    margin-top: 4px;
+  }
+
+  .language-selector__dropdown.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .language-selector__option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .language-selector__option:hover {
+    background: #f5f5f5;
+  }
+
+  .language-selector__option:first-child {
+    border-radius: 0;
+  }
+
+  .language-selector__option:last-child {
+    border-radius: 0;
+    border-bottom: none;
+  }
+
+  .language-selector__option.active {
+    background: #3273dc;
+    color: white;
+  }
+
+  /* Dark mode support */
+  @media (prefers-color-scheme: dark) {
+    .language-selector__current {
+      background: transparent;
+      border-bottom-color: #4a4a4a;
+      color: #f5f5f5;
+    }
+
+    .language-selector__current:hover {
+      background: transparent;
+      border-bottom-color: #5a5a5a;
+    }
+
+    .language-selector__dropdown {
+      background: #2a2a2a;
+      border-bottom-color: #4a4a4a;
+      color: #f5f5f5;
+    }
+
+    .language-selector__option {
+      border-bottom-color: #3a3a3a;
+    }
+
+    .language-selector__option:hover {
+      background: #3a3a3a;
+    }
+  }
+
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .language-selector__current {
+      padding: 6px 10px;
+      min-width: 70px;
+    }
+
+    .language-selector__text {
+      font-size: 12px;
+    }
+
+    .language-selector__flag {
+      font-size: 14px;
+    }
+  }
+</style>
+
+<script>
+  import { initClientTranslations } from '../i18n/translations.js';
+  
+  // Initialize client-side translations
+  initClientTranslations();
+  
+  // Set up fancy language selector
+  document.addEventListener('DOMContentLoaded', () => {
+    const currentLang = document.getElementById('current-lang') as HTMLElement;
+    const dropdown = document.getElementById('lang-dropdown') as HTMLElement;
+    const options = document.querySelectorAll('.language-selector__option');
+    
+    if (currentLang && dropdown) {
+      // Set initial language
+      const currentLocale = (window as any).i18n?.getLocale() || 'en';
+      updateCurrentLanguage(currentLocale);
+      
+      // Toggle dropdown
+      currentLang.addEventListener('click', () => {
+        dropdown.classList.toggle('show');
+        currentLang.classList.toggle('active');
+      });
+      
+      // Handle option selection
+      options.forEach(option => {
+        option.addEventListener('click', () => {
+          const lang = option.getAttribute('data-lang');
+          if (lang) {
+            (window as any).i18n?.setLocale(lang);
+            updateCurrentLanguage(lang);
+            dropdown.classList.remove('show');
+            currentLang.classList.remove('active');
+          }
+        });
+      });
+      
+      // Close dropdown when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!currentLang.contains(e.target as Node) && !dropdown.contains(e.target as Node)) {
+          dropdown.classList.remove('show');
+          currentLang.classList.remove('active');
+        }
+      });
+    }
+    
+    function updateCurrentLanguage(locale: string) {
+      const currentLang = document.getElementById('current-lang') as HTMLElement;
+      const flag = currentLang.querySelector('.language-selector__flag') as HTMLElement;
+      const text = currentLang.querySelector('.language-selector__text') as HTMLElement;
+      
+      if (locale === 'en') {
+        flag.className = 'language-selector__flag fi fi-gb';
+        text.textContent = 'EN';
+      } else if (locale === 'es') {
+        flag.className = 'language-selector__flag fi fi-es';
+        text.textContent = 'ES';
+      }
+      
+      // Update active state in dropdown
+      options.forEach(option => {
+        option.classList.remove('active');
+        if (option.getAttribute('data-lang') === locale) {
+          option.classList.add('active');
+        }
+      });
+    }
+  });
+</script>

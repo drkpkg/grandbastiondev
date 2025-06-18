@@ -35,4 +35,13 @@ const { title } = Astro.props;
 			  </a>
 		</div>
 	</footer>
+	
+	<script>
+		import { initClientTranslations } from '../i18n/translations.js';
+		
+		// Initialize client-side translations when the page loads
+		document.addEventListener('DOMContentLoaded', () => {
+			initClientTranslations();
+		});
+	</script>
 </html>

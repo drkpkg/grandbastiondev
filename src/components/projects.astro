@@ -1,5 +1,6 @@
 ---
 import { ProjectStatus } from "../models/project-status";
+import { t } from "../i18n/translations.js";
 
 const projectList = [
     {
@@ -20,7 +21,7 @@ const projectList = [
 ---
 
 <section id="projects" class="section">
-    <h3 class="title">Projects</h3>
+    <h3 class="title" data-i18n="projects.title">{t("projects.title")}</h3>
     <div class="columns is-multiline">
         {
             projectList.map((project) => (

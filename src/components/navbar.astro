@@ -1,49 +1,327 @@
 ---
-import { ThemeSwitch } from "free-astro-components";
+import { t } from "../i18n/translations.js";
+import LanguageSelector from "./language-selector.astro";
 
 const site = {
   baseurl: "https://grandbastion.dev",
 };
 ---
 
-<nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a class="navbar-item" href="#">
-      <h1>GB</h1>
-    </a>
-    <a
-      role="button"
-      class="navbar-burger burger"
-      aria-label="menu"
-      aria-expanded="false"
-      data-target="main-navbar"
-    >
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
+<nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="navbar-brand">
+      <a class="navbar-item brand-logo" href="#top">
+        <div class="brand-text">
+          <span class="brand-initials">GB</span>
+        </div>
+      </a>
+      <a
+        role="button"
+        class="navbar-burger burger"
+        aria-label="menu"
+        aria-expanded="false"
+        data-target="main-navbar"
+      >
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    
     <div id="main-navbar" class="navbar-menu">
       <div class="navbar-start">
-        <a class="navbar-item" href="#about"> Home</a>
-        <a class="navbar-item" href="#about"> About me</a>
-        <a class="navbar-item" href="#projects"> Projects</a>
-        <a class="navbar-item" href="#contact"> Contact</a>
+        <a class="navbar-item nav-link" href="#top" data-i18n="nav.home">
+          {t("nav.home")}
+        </a>
+        <a class="navbar-item nav-link" href="#about" data-i18n="nav.about">
+          {t("nav.about")}
+        </a>
+        <a class="navbar-item nav-link" href="#projects" data-i18n="nav.projects">
+          {t("nav.projects")}
+        </a>
+        <a class="navbar-item nav-link" href="#contact" data-i18n="nav.contact">
+          {t("nav.contact")}
+        </a>
         <a class="navbar-item wobbly-text wiki-text" href="https://wiki.grandbastion.dev" target="_blank">
           <span class="wiki-normal">Wiki</span>
           <span class="wiki-exclaim">Wiki!</span>
         </a>
-        <!-- <a class="navbar-item" href={site.baseurl.concat("/blog")}> Blog</a> -->
+      </div>
+      
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <LanguageSelector />
+        </div>
       </div>
     </div>
   </div>
 </nav>
 
+<style>
+  .navbar {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    /* Visible by default */
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .navbar.hidden {
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .navbar.scrolled {
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+  }
+
+  .navbar-brand {
+    align-items: center;
+  }
+
+  .brand-logo {
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+  }
+
+  .brand-logo:hover {
+    transform: scale(1.05);
+  }
+
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1;
+  }
+
+  .brand-initials {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #3273dc;
+    letter-spacing: -0.5px;
+  }
+
+  .brand-full {
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: #666;
+    margin-top: -2px;
+  }
+
+  .navbar-menu {
+    background: transparent;
+  }
+
+  .navbar-start {
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-link {
+    position: relative;
+    font-weight: 500;
+    color: #4a4a4a;
+    transition: all 0.3s ease;
+    margin: 0 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+  }
+
+  .nav-link:hover {
+    color: #3273dc;
+    background: rgba(50, 115, 220, 0.1);
+    transform: translateY(-1px);
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: #3273dc;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+  }
+
+  .nav-link:hover::after {
+    width: 80%;
+  }
+
+  .navbar-end {
+    align-items: center;
+  }
+
+  .navbar-burger {
+    border: none;
+    background: transparent;
+    transition: all 0.3s ease;
+  }
+
+  .navbar-burger:hover {
+    background: rgba(50, 115, 220, 0.1);
+  }
+
+  .navbar-burger span {
+    background: #4a4a4a;
+    transition: all 0.3s ease;
+  }
+
+  .navbar-burger.is-active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  .navbar-burger.is-active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .navbar-burger.is-active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+  }
+
+  /* Dark mode support */
+  @media (prefers-color-scheme: dark) {
+    .navbar {
+      background: rgba(26, 26, 26, 0.95);
+      border-bottom-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .navbar.scrolled {
+      background: rgba(26, 26, 26, 0.98);
+    }
+
+    .brand-initials {
+      color: #4fc3f7;
+    }
+
+    .brand-full {
+      color: #aaa;
+    }
+
+    .nav-link {
+      color: #e0e0e0;
+    }
+
+    .nav-link:hover {
+      color: #4fc3f7;
+      background: rgba(79, 195, 247, 0.1);
+    }
+
+    .nav-link::after {
+      background: #4fc3f7;
+    }
+
+    .navbar-burger span {
+      background: #e0e0e0;
+    }
+
+    .navbar-burger:hover {
+      background: rgba(79, 195, 247, 0.1);
+    }
+  }
+
+  /* Mobile responsiveness */
+  @media screen and (max-width: 1023px) {
+    .navbar {
+      /* Always visible on mobile */
+      transform: translateY(0) !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+
+    .navbar-menu {
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-start {
+      flex-direction: column;
+      align-items: stretch;
+      padding: 1rem 0;
+    }
+
+    .nav-link {
+      margin: 0.25rem 1rem;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+    }
+
+    .navbar-end {
+      padding: 1rem;
+      justify-content: center;
+    }
+
+    .brand-full {
+      display: none;
+    }
+
+    .brand-initials {
+      font-size: 1.8rem;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) and (max-width: 1023px) {
+    .navbar-menu {
+      background: rgba(26, 26, 26, 0.98);
+      border-top-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  /* Smooth scrolling for anchor links */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Active state for current section */
+  .nav-link.active {
+    color: #3273dc;
+    background: rgba(50, 115, 220, 0.1);
+  }
+
+  .nav-link.active::after {
+    width: 80%;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .nav-link.active {
+      color: #4fc3f7;
+      background: rgba(79, 195, 247, 0.1);
+    }
+  }
+
+  /* Hover trigger area indicator (optional - for debugging) */
+  .navbar-trigger-area {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    z-index: 999;
+    pointer-events: none;
+    /* Uncomment the line below to see the trigger area */
+    /* background: rgba(255, 0, 0, 0.1); */
+  }
+</style>
+
 <script>
   document.addEventListener("DOMContentLoaded", () => {
+    // Mobile burger menu functionality
     const $navbarBurgers = Array.prototype.slice.call(
       document.querySelectorAll(".navbar-burger"),
       0,
     );
+    
     if ($navbarBurgers.length > 0) {
       $navbarBurgers.forEach((el) => {
         el.addEventListener("click", () => {
@@ -54,5 +332,183 @@ const site = {
         });
       });
     }
+
+    // Navbar scroll and hover effect
+    const navbar = document.querySelector('.navbar') as HTMLElement;
+    let lastScrollTop = 0;
+    let isHovering = false;
+    let hoverTimeout: number | null = null;
+
+    // Mouse move handler for hover effect
+    function handleMouseMove(e: MouseEvent) {
+      const mouseY = e.clientY;
+      const triggerDistance = 80; // Distance from top to trigger navbar
+      
+      if (mouseY <= triggerDistance) {
+        isHovering = true;
+        showNavbar();
+        
+        // Clear any existing timeout
+        if (hoverTimeout) {
+          clearTimeout(hoverTimeout);
+          hoverTimeout = null;
+        }
+      } else {
+        isHovering = false;
+        // Add delay before hiding navbar when mouse leaves
+        if (hoverTimeout) {
+          clearTimeout(hoverTimeout);
+        }
+        hoverTimeout = window.setTimeout(() => {
+          if (!isHovering) {
+            hideNavbar();
+          }
+        }, 500); // 500ms delay
+      }
+    }
+
+    // Show navbar function
+    function showNavbar() {
+      if (navbar) {
+        navbar.classList.remove('hidden');
+      }
+    }
+
+    // Hide navbar function
+    function hideNavbar() {
+      if (navbar && !isHovering) {
+        navbar.classList.add('hidden');
+      }
+    }
+
+    // Scroll handler
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      
+      // Add scrolled class for styling
+      if (scrollTop > 50) {
+        navbar?.classList.add('scrolled');
+      } else {
+        navbar?.classList.remove('scrolled');
+      }
+
+      // Always show navbar when at the top of the page
+      if (scrollTop <= 100) {
+        showNavbar();
+      } else if (scrollTop < lastScrollTop) {
+        // Show navbar when scrolling up
+        showNavbar();
+      } else if (scrollTop > lastScrollTop && scrollTop > 100 && !isHovering) {
+        // Hide navbar when scrolling down (unless hovering)
+        hideNavbar();
+      }
+      
+      lastScrollTop = scrollTop;
+    });
+
+    // Mouse move listener
+    document.addEventListener('mousemove', handleMouseMove);
+
+    // Show navbar on page load
+    setTimeout(() => {
+      showNavbar();
+      // Only hide after delay if we're not at the top
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      if (scrollTop > 100) {
+        setTimeout(() => {
+          if (!isHovering) {
+            hideNavbar();
+          }
+        }, 2000);
+      }
+    }, 1000);
+
+    // Active section highlighting
+    const sections = document.querySelectorAll('section[id]');
+    const navItems = document.querySelectorAll('.nav-link');
+
+    // Smooth scrolling for anchor links
+    const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href');
+        const targetElement = document.querySelector(targetId) as HTMLElement;
+        
+        // Immediately update active state for clicked item
+        navItems.forEach(item => {
+          item.classList.remove('active');
+        });
+        link.classList.add('active');
+        
+        if (targetElement && navbar) {
+          const navbarHeight = navbar.offsetHeight;
+          const targetPosition = targetElement.offsetTop - navbarHeight - 20;
+          
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+        }
+
+        // Close mobile menu if open
+        const burger = document.querySelector('.navbar-burger');
+        const menu = document.getElementById('main-navbar');
+        if (burger?.classList.contains('is-active')) {
+          burger.classList.remove('is-active');
+          menu?.classList.remove('is-active');
+        }
+      });
+    });
+
+    function updateActiveNavItem() {
+      const scrollPosition = window.scrollY + 100;
+
+      // Check if we're at the very top (home section)
+      if (scrollPosition < 150) {
+        navItems.forEach(item => {
+          item.classList.remove('active');
+          if (item.getAttribute('href') === '#top') {
+            item.classList.add('active');
+          }
+        });
+        return;
+      }
+
+      // Find the current active section
+      let activeSectionId = null;
+      sections.forEach(section => {
+        const sectionElement = section as HTMLElement;
+        const sectionTop = sectionElement.offsetTop;
+        const sectionHeight = sectionElement.offsetHeight;
+        const sectionId = section.getAttribute('id');
+        
+        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+          activeSectionId = sectionId;
+        }
+      });
+
+      // Update nav items based on active section
+      if (activeSectionId) {
+        navItems.forEach(item => {
+          item.classList.remove('active');
+          if (item.getAttribute('href') === `#${activeSectionId}`) {
+            item.classList.add('active');
+          }
+        });
+      }
+    }
+
+    // Use throttled scroll event to prevent too many updates
+    let scrollTimeout: number | null = null;
+    window.addEventListener('scroll', () => {
+      if (scrollTimeout) {
+        clearTimeout(scrollTimeout);
+      }
+      scrollTimeout = window.setTimeout(() => {
+        updateActiveNavItem();
+      }, 50); // Small delay to prevent conflicts with click events
+    });
+    updateActiveNavItem(); // Initial call
   });
 </script>

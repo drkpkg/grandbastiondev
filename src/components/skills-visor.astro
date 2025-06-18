@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
+import { t } from "../i18n/translations.js";
 
 const url = "https://asset.grandbastion.dev"
 let skills = {
@@ -133,7 +134,7 @@ let skills = {
 
 <section class="skills-visor">
     <div class="skills-visor__category">
-        <h2 class="skills-visor__title">Consulting</h2>
+        <h2 class="skills-visor__title" data-i18n="skills.consulting">{t("skills.consulting")}</h2>
         <div class="skills-visor__items">
             {
                 skills.consulting.map((item) => {
@@ -148,7 +149,7 @@ let skills = {
         </div>
     </div>
     <div class="skills-visor__category">
-        <h2 class="skills-visor__title">Frontend</h2>
+        <h2 class="skills-visor__title" data-i18n="skills.frameworks.frontend">{t("skills.frameworks.frontend")}</h2>
         <div class="skills-visor__items">
             {
                 skills.frameworks.frontend.map((item) => {
@@ -163,7 +164,7 @@ let skills = {
         </div>
     </div>
     <div class="skills-visor__category">
-        <h2 class="skills-visor__title">Backend</h2>
+        <h2 class="skills-visor__title" data-i18n="skills.frameworks.backend">{t("skills.frameworks.backend")}</h2>
         <div class="skills-visor__items">
             {
                 skills.frameworks.backend.map((item) => {
@@ -178,7 +179,7 @@ let skills = {
         </div>
     </div>
     <div class="skills-visor__category">
-        <h2 class="skills-visor__title">Databases</h2>
+        <h2 class="skills-visor__title" data-i18n="skills.databases">{t("skills.databases")}</h2>
         <div class="skills-visor__items">
             {
                 skills.databases.map((item) => {
@@ -193,7 +194,7 @@ let skills = {
         </div>
     </div>
     <div class="skills-visor__category">
-        <h2 class="skills-visor__title">Infrastructure</h2>
+        <h2 class="skills-visor__title" data-i18n="skills.infrastructure">{t("skills.infrastructure")}</h2>
         <div class="skills-visor__items">
             {
                 skills.infrastructure.map((item) => {

@@ -178,6 +178,66 @@
     }
 }
 
+/* Global styles for better typography and spacing */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #4a4a4a;
+}
+
+.title {
+    color: #363636;
+    font-weight: 600;
+}
+
+.subtitle {
+    color: #4a4a4a;
+    font-weight: 400;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    body {
+        color: #e0e0e0;
+        background: #1a1a1a;
+    }
+
+    .title {
+        color: #f5f5f5;
+    }
+
+    .subtitle {
+        color: #b0b0b0;
+    }
+
+    .dotted-line {
+        border-top-color: #4fc3f7;
+    }
+}
+
+/* Improved container spacing */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Better section spacing */
+.section {
+    padding: 3rem 0;
+}
+
+/* Responsive improvements */
+@media screen and (max-width: 768px) {
+    .container {
+        padding: 0 0.75rem;
+    }
+    
+    .section {
+        padding: 2rem 0;
+    }
+}
+
 /* Wobbly shake effect only on hover */
 .wobbly-text {
     animation: wobble 0.5s ease-in-out;
