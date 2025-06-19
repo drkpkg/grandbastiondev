@@ -14,11 +14,6 @@ jobs:
 
     - name: Deploy application
       run: |
-        cd /home/bastion/services/grandbastiondev
-        docker compose down
-        sudo rm -rf /home/bastion/actions-runner/_work/grandbastiondev/
-        sudo mv /home/bastion/services/grandbastiondev /home/bastion/actions-runner/_work/grandbastiondev/
-        cd /home/bastion/actions-runner/_work/grandbastiondev/grandbastiondev/
         chmod +x build_and_run.sh
         ./build_and_run.sh
         echo "Despliegue completado!"
