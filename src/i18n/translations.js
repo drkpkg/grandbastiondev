@@ -14,7 +14,9 @@ export const translations = {
     "skills.frameworks.frontend": "Frontend",
     "skills.frameworks.backend": "Backend",
     "skills.databases": "Databases",
-    "skills.infrastructure": "Infrastructure"
+    "skills.infrastructure": "Infrastructure",
+    "experience.title": "Professional Experience",
+    "experience.view": "See my experience"
   },
   es: {
     "nav.home": "Inicio",
@@ -31,7 +33,9 @@ export const translations = {
     "skills.frameworks.frontend": "Frontend",
     "skills.frameworks.backend": "Backend",
     "skills.databases": "Databases",
-    "skills.infrastructure": "Infrastructure"
+    "skills.infrastructure": "Infrastructure",
+    "experience.title": "Experiencia Profesional",
+    "experience.view": "Ver mi experiencia"
   }
 };
 
@@ -53,8 +57,58 @@ export function initClientTranslations() {
       }
     });
     
+    // Update experience data if modal is open
+    updateExperienceData();
+    
     // Log for debugging
     console.log(`Updated ${elements.length} elements to locale: ${currentLocale}`);
+  }
+  
+  async function updateExperienceData() {
+    const modal = document.getElementById('timeline-modal');
+    if (modal && modal.style.display === 'block') {
+      try {
+        // Fetch experience data for current locale
+        const response = await fetch(`/api/experience?lang=${currentLocale}`);
+        if (response.ok) {
+          const experienceData = await response.json();
+          updateTimelineContent(experienceData);
+        }
+      } catch (error) {
+        console.error('Error updating experience data:', error);
+      }
+    }
+  }
+  
+  function updateTimelineContent(experienceData) {
+    const timelineContainer = document.querySelector('.timeline-container');
+    if (!timelineContainer) return;
+    
+    timelineContainer.innerHTML = '';
+    
+    experienceData.forEach(job => {
+      const timelineItem = document.createElement('div');
+      timelineItem.className = 'timeline-item';
+      
+      timelineItem.innerHTML = `
+        <div class="timeline-marker"></div>
+        <div class="timeline-content">
+          <div class="timeline-header">
+            <h3 class="timeline-title">${job.title}</h3>
+            <div class="timeline-company">${job.company}</div>
+            <div class="timeline-location">${job.location}</div>
+            <div class="timeline-period">${job.period}</div>
+          </div>
+          <div class="timeline-description">
+            <ul>
+              ${job.description.map(item => `<li>${item}</li>`).join('')}
+            </ul>
+          </div>
+        </div>
+      `;
+      
+      timelineContainer.appendChild(timelineItem);
+    });
   }
   
   function setLocale(locale) {

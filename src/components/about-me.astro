@@ -1,5 +1,6 @@
 ---
 import SkillsVisor from "./skills-visor.astro";
+import Timeline from "./timeline.astro";
 import { t } from "../i18n/translations.js";
 ---
 
@@ -13,5 +14,45 @@ import { t } from "../i18n/translations.js";
       </div>
     </div>
     <SkillsVisor id="skills-visor" />
-  </div>  
+  </div>
+  <Timeline />
 </section>
+
+<style>
+  .experience-button-container {
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .experience-button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  }
+
+  .experience-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  }
+
+  .experience-button:active {
+    transform: translateY(0);
+  }
+
+  /* Dark mode styles */
+  html.dark-mode .experience-button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  }
+
+  html.dark-mode .experience-button:hover {
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+  }
+</style>
