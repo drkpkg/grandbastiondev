@@ -15,6 +15,7 @@ jobs:
 
     - name: Deploy application
       run: |
+        echo "Deploying application for ${{ secrets.SSH_USER }}"
         cd /home/${{ secrets.SSH_USER }}/services/grandbastiondev
         sudo cp -r /home/${{ secrets.SSH_USER }}/actions-runner/_work/grandbastiondev/grandbastiondev/* .
         chmod +x build_and_run.sh
