@@ -14,8 +14,9 @@ jobs:
 
     - name: Deploy application
       run: |
-        cd /home/${{ secrets.SSH_USER }}/services/grandbastiondev
-        sudo cp -r /home/${{ secrets.SSH_USER }}/actions-runner/_work/grandbastiondev/grandbastiondev/* .
+        cd /home/bastion/services/grandbastiondev
+        docker compose down
+        sudo cp -r /home/bastion/actions-runner/_work/grandbastiondev/grandbastiondev/* .
         chmod +x build_and_run.sh
         ./build_and_run.sh
         echo "Despliegue completado!"
