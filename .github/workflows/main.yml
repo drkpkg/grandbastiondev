@@ -3,8 +3,7 @@ name: Deploy to VPS
 on:
   push:
     branches:
-      - main # Desencadena el workflow en cada push a la rama 'main'
-
+      - main
 jobs:
   deploy:
     runs-on: self-hosted
@@ -15,7 +14,6 @@ jobs:
 
     - name: Deploy application
       run: |
-        echo "Deploying application for ${{ secrets.SSH_USER }}"
         cd /home/${{ secrets.SSH_USER }}/services/grandbastiondev
         sudo cp -r /home/${{ secrets.SSH_USER }}/actions-runner/_work/grandbastiondev/grandbastiondev/* .
         chmod +x build_and_run.sh
