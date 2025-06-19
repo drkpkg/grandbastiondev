@@ -15,7 +15,7 @@ const experience = getExperience(locale);
       <button class="timeline-close-btn" onclick="closeTimelineModal()">&times;</button>
     </div>
     <div class="timeline-container">
-      {experience.map((job) => (
+      {experience.map((job: any) => (
         <div class="timeline-item">
           <div class="timeline-marker"></div>
           <div class="timeline-content">
@@ -27,7 +27,7 @@ const experience = getExperience(locale);
             </div>
             <div class="timeline-description">
               <ul>
-                {job.description.map((item) => (
+                {job.description.map((item: string) => (
                   <li>{item}</li>
                 ))}
               </ul>
@@ -327,7 +327,16 @@ const experience = getExperience(locale);
 </style>
 
 <script>
-  function openTimelineModal() {
+  // Type definitions
+  interface Job {
+    title: string;
+    company: string;
+    location: string;
+    period: string;
+    description: string[];
+  }
+
+  function openTimelineModal(): void {
     const modal = document.getElementById('timeline-modal');
     if (modal) {
       modal.style.display = 'block';
@@ -335,7 +344,7 @@ const experience = getExperience(locale);
     }
   }
 
-  function closeTimelineModal() {
+  function closeTimelineModal(): void {
     const modal = document.getElementById('timeline-modal');
     if (modal) {
       modal.style.display = 'none';
@@ -344,7 +353,7 @@ const experience = getExperience(locale);
   }
 
   // Close modal when clicking outside
-  window.onclick = function(event) {
+  window.onclick = function(event: Event): void {
     const modal = document.getElementById('timeline-modal');
     if (event.target === modal) {
       closeTimelineModal();
@@ -352,19 +361,19 @@ const experience = getExperience(locale);
   }
 
   // Close modal with Escape key
-  document.addEventListener('keydown', function(event) {
+  document.addEventListener('keydown', function(event: KeyboardEvent): void {
     if (event.key === 'Escape') {
       closeTimelineModal();
     }
   });
 
   // Listen for locale changes and update experience data
-  document.addEventListener('localeChanged', function(event) {
+  document.addEventListener('localeChanged', function(event: any): void {
     const locale = event.detail.locale;
     updateExperienceData(locale);
   });
 
-  async function updateExperienceData(locale) {
+  async function updateExperienceData(locale: string): Promise<void> {
     const modal = document.getElementById('timeline-modal');
     if (modal && modal.style.display === 'block') {
       try {
@@ -379,13 +388,13 @@ const experience = getExperience(locale);
     }
   }
 
-  function updateTimelineContent(experienceData) {
+  function updateTimelineContent(experienceData: Job[]): void {
     const timelineContainer = document.querySelector('.timeline-container');
     if (!timelineContainer) return;
     
     timelineContainer.innerHTML = '';
     
-    experienceData.forEach(job => {
+    experienceData.forEach((job: Job) => {
       const timelineItem = document.createElement('div');
       timelineItem.className = 'timeline-item';
       
@@ -400,7 +409,7 @@ const experience = getExperience(locale);
           </div>
           <div class="timeline-description">
             <ul>
-              ${job.description.map(item => `<li>${item}</li>`).join('')}
+              ${job.description.map((item: string) => `<li>${item}</li>`).join('')}
             </ul>
           </div>
         </div>
@@ -410,7 +419,7 @@ const experience = getExperience(locale);
     });
   }
 
-  // Expose function globally
-  window.openTimelineModal = openTimelineModal;
-  window.closeTimelineModal = closeTimelineModal;
+  // Expose functions globally with proper type declarations
+  (window as any).openTimelineModal = openTimelineModal;
+  (window as any).closeTimelineModal = closeTimelineModal;
 </script> 
