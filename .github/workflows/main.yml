@@ -1,30 +1,23 @@
 name: Deploy to VPS
+Remember: The project has a script build_and_run.sh do all the job
 
 on:
   push:
     branches:
-      - main
-  workflow_dispatch:
+      - main # Desencadena el workflow en cada push a la rama 'main'
 
 jobs:
-  run_pull:
-    name: Pull from Github
-    runs-on: ubuntu-latest
+  deploy:
+    runs-on: self-hosted
+
     steps:
-      - name: Install ssh key
-        run: |
-            mkdir -p ~/.ssh
-            echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-            ssh-keyscan -H ${{ secrets.SSH_HOST }} > ~/.ssh/known_hosts
-      - name: Connect and pull
-        run: |
-            ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'cd /home/${{ secrets.SSH_USER }}/grandbastion && git pull'
-            ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'npm run build'
-            ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'echo "Creating docker image"'
-            ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'docker build -t grandbastion:latest .'
-            ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'echo "Running docker compose"'
-            ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'docker-compose -f /home/${{ secrets.SSH_USER }}/grandbastion/docker-compose.yml up -d'
-      - name: Cleanup
-        run: |
-          rm -rf ~/.ssh/id_rsa
-          rm -rf ~/.ssh/known_hosts
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Deploy application
+      run: |
+        cd /home/${{ secrets.SSH_USER }}/services/grandbastiondev
+        sudo cp -r /home/${{ secrets.SSH_USER }}/actions-runner/_work/grandbastiondev/grandbastiondev/* .
+        chmod +x build_and_run.sh
+        ./build_and_run.sh
+        echo "Despliegue completado!"
