@@ -51,16 +51,27 @@
     align-items: center;
     width: auto;
     gap: 10px;
+    transition: all 0.3s ease;
+    padding: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+}
 
-    img {
-        width: 96px;
-        height: 96px;
-    }
+.skills-visor__item:hover {
+    background: rgba(50, 115, 220, 0.1);
+    transform: translateY(-2px);
+}
 
-    span {
-        font-size: 0.8rem;
-        text-align: center;
-    }
+.skills-visor__item img {
+    width: 96px;
+    height: 96px;
+    transition: all 0.3s ease;
+}
+
+.skills-visor__item span {
+    font-size: 0.8rem;
+    text-align: center;
+    transition: color 0.3s ease;
 }
 
 .pulse-effect {
@@ -213,6 +224,353 @@ body {
     .dotted-line {
         border-top-color: #4fc3f7;
     }
+
+    /* Bulma components dark mode overrides */
+    .card {
+        background-color: #2a2a2a !important;
+        color: #e0e0e0 !important;
+        border: 1px solid #404040 !important;
+    }
+
+    .card-content {
+        color: #e0e0e0 !important;
+    }
+
+    .tag {
+        background-color: #404040 !important;
+        color: #e0e0e0 !important;
+    }
+
+    .tag.is-primary {
+        background-color: #3273dc !important;
+        color: white !important;
+    }
+
+    .tag.is-info {
+        background-color: #3298dc !important;
+        color: white !important;
+    }
+
+    .tag a {
+        color: inherit !important;
+        text-decoration: none !important;
+    }
+
+    .tag a:hover {
+        color: inherit !important;
+        text-decoration: underline !important;
+    }
+
+    .content h1, .content h2, .content h3, .content h4, .content h5, .content h6 {
+        color: #f5f5f5 !important;
+    }
+
+    .content p {
+        color: #e0e0e0 !important;
+    }
+
+    /* Footer dark mode */
+    footer {
+        background-color: #2a2a2a !important;
+        color: #e0e0e0 !important;
+        border-top: 1px solid #404040 !important;
+    }
+
+    footer p {
+        color: #e0e0e0 !important;
+    }
+
+    footer strong {
+        color: #f5f5f5 !important;
+    }
+
+    /* 404 page dark mode */
+    .error-title {
+        color: #f5f5f5 !important;
+    }
+
+    .error-message {
+        color: #e0e0e0 !important;
+    }
+
+    /* Pulse effect dark mode */
+    .pulse-effect.pulse-active::after {
+        background: rgba(255, 255, 255, 0.2) !important;
+    }
+
+    /* Wobbly text dark mode */
+    .wobbly-text:hover {
+        color: #4fc3f7 !important;
+    }
+
+    /* Skills visor dark mode */
+    .skills-visor__title {
+        color: #f5f5f5 !important;
+    }
+
+    .skills-visor__item span {
+        color: #e0e0e0 !important;
+    }
+
+    /* Social button dark mode */
+    .social-button span {
+        color: #e0e0e0 !important;
+    }
+
+    /* Bulma columns and containers */
+    .columns {
+        color: #e0e0e0 !important;
+    }
+
+    .column {
+        color: #e0e0e0 !important;
+    }
+
+    /* Links in dark mode */
+    a {
+        color: #4fc3f7 !important;
+    }
+
+    a:hover {
+        color: #81d4fa !important;
+    }
+
+    /* Bulma navbar dark mode overrides */
+    .navbar-item {
+        color: #e0e0e0 !important;
+    }
+
+    .navbar-item:hover {
+        background-color: rgba(79, 195, 247, 0.1) !important;
+    }
+
+    /* Bulma section dark mode */
+    .section {
+        color: #e0e0e0 !important;
+    }
+
+    /* Bulma container dark mode */
+    .container {
+        color: #e0e0e0 !important;
+    }
+
+    /* Skills visor SVG images dark mode support */
+    .skills-visor__item img {
+        filter: invert(1) brightness(0.9) contrast(1.2);
+        transition: filter 0.3s ease;
+    }
+    
+    .skills-visor__item:hover {
+        background: rgba(79, 195, 247, 0.1) !important;
+        transform: translateY(-2px);
+    }
+    
+    .skills-visor__item:hover span {
+        color: #4fc3f7 !important;
+    }
+    
+    .skills-visor__item:hover img {
+        filter: invert(1) brightness(1.1) contrast(1.3);
+        transform: scale(1.05);
+    }
+
+    /* Additional SVG dark mode handling for different image types */
+    .skills-visor__item img[src*="javascript.svg"],
+    .skills-visor__item img[src*="typescript.svg"] {
+        filter: invert(1) brightness(1.2) contrast(1.1);
+    }
+
+    .skills-visor__item img[src*="python.svg"],
+    .skills-visor__item img[src*="java.svg"],
+    .skills-visor__item img[src*="ruby.svg"] {
+        filter: invert(1) brightness(1.1) contrast(1.2);
+    }
+
+    .skills-visor__item img[src*="docker.svg"],
+    .skills-visor__item img[src*="kubernetes.svg"] {
+        filter: invert(1) brightness(1.0) contrast(1.3);
+    }
+}
+
+/* Manual dark mode toggle support */
+html.dark-mode {
+    color-scheme: dark;
+}
+
+html.dark-mode body {
+    color: #e0e0e0;
+    background: #1a1a1a;
+}
+
+html.dark-mode .title {
+    color: #f5f5f5;
+}
+
+html.dark-mode .subtitle {
+    color: #b0b0b0;
+}
+
+html.dark-mode .dotted-line {
+    border-top-color: #4fc3f7;
+}
+
+html.dark-mode .card {
+    background-color: #2a2a2a !important;
+    color: #e0e0e0 !important;
+    border: 1px solid #404040 !important;
+}
+
+html.dark-mode .card-content {
+    color: #e0e0e0 !important;
+}
+
+html.dark-mode .tag {
+    background-color: #404040 !important;
+    color: #e0e0e0 !important;
+}
+
+html.dark-mode .tag.is-primary {
+    background-color: #3273dc !important;
+    color: white !important;
+}
+
+html.dark-mode .tag.is-info {
+    background-color: #3298dc !important;
+    color: white !important;
+}
+
+html.dark-mode .tag a {
+    color: inherit !important;
+    text-decoration: none !important;
+}
+
+html.dark-mode .tag a:hover {
+    color: inherit !important;
+    text-decoration: underline !important;
+}
+
+html.dark-mode .content h1, 
+html.dark-mode .content h2, 
+html.dark-mode .content h3, 
+html.dark-mode .content h4, 
+html.dark-mode .content h5, 
+html.dark-mode .content h6 {
+    color: #f5f5f5 !important;
+}
+
+html.dark-mode .content p {
+    color: #e0e0e0 !important;
+}
+
+html.dark-mode footer {
+    background-color: #2a2a2a !important;
+    color: #e0e0e0 !important;
+    border-top: 1px solid #404040 !important;
+}
+
+html.dark-mode footer p {
+    color: #e0e0e0 !important;
+}
+
+html.dark-mode footer strong {
+    color: #f5f5f5 !important;
+}
+
+html.dark-mode .error-title {
+    color: #f5f5f5 !important;
+}
+
+html.dark-mode .error-message {
+    color: #e0e0e0 !important;
+}
+
+html.dark-mode .pulse-effect.pulse-active::after {
+    background: rgba(255, 255, 255, 0.2) !important;
+}
+
+html.dark-mode .wobbly-text:hover {
+    color: #4fc3f7 !important;
+}
+
+html.dark-mode .skills-visor__title {
+    color: #f5f5f5 !important;
+}
+
+html.dark-mode .skills-visor__item span {
+    color: #e0e0e0 !important;
+}
+
+html.dark-mode .skills-visor__item:hover {
+    background: rgba(79, 195, 247, 0.1) !important;
+    transform: translateY(-2px);
+}
+
+html.dark-mode .skills-visor__item:hover span {
+    color: #4fc3f7 !important;
+}
+
+html.dark-mode .social-button span {
+    color: #e0e0e0 !important;
+}
+
+html.dark-mode .columns {
+    color: #e0e0e0 !important;
+}
+
+html.dark-mode .column {
+    color: #e0e0e0 !important;
+}
+
+html.dark-mode a {
+    color: #4fc3f7 !important;
+}
+
+html.dark-mode a:hover {
+    color: #81d4fa !important;
+}
+
+html.dark-mode .navbar-item {
+    color: #e0e0e0 !important;
+}
+
+html.dark-mode .navbar-item:hover {
+    background-color: rgba(79, 195, 247, 0.1) !important;
+}
+
+html.dark-mode .section {
+    color: #e0e0e0 !important;
+}
+
+html.dark-mode .container {
+    color: #e0e0e0 !important;
+}
+
+/* Skills visor SVG images dark mode support */
+html.dark-mode .skills-visor__item img {
+    filter: invert(1) brightness(0.9) contrast(1.2);
+    transition: filter 0.3s ease;
+}
+
+html.dark-mode .skills-visor__item:hover img {
+    filter: invert(1) brightness(1.1) contrast(1.3);
+    transform: scale(1.05);
+}
+
+/* Additional SVG dark mode handling for different image types */
+html.dark-mode .skills-visor__item img[src*="javascript.svg"],
+html.dark-mode .skills-visor__item img[src*="typescript.svg"] {
+    filter: invert(1) brightness(1.2) contrast(1.1);
+}
+
+html.dark-mode .skills-visor__item img[src*="python.svg"],
+html.dark-mode .skills-visor__item img[src*="java.svg"],
+html.dark-mode .skills-visor__item img[src*="ruby.svg"] {
+    filter: invert(1) brightness(1.1) contrast(1.2);
+}
+
+html.dark-mode .skills-visor__item img[src*="docker.svg"],
+html.dark-mode .skills-visor__item img[src*="kubernetes.svg"] {
+    filter: invert(1) brightness(1.0) contrast(1.3);
 }
 
 /* Improved container spacing */
@@ -270,4 +628,42 @@ body {
 }
 .wiki-text:hover .wiki-exclaim {
     display: inline;
+}
+
+/* System preference versions */
+@media (prefers-color-scheme: dark) {
+    .skills-visor__item img {
+        filter: invert(1) brightness(0.9) contrast(1.2);
+        transition: filter 0.3s ease;
+    }
+    
+    .skills-visor__item:hover img {
+        filter: invert(1) brightness(1.1) contrast(1.3);
+        transform: scale(1.05);
+    }
+    
+    .skills-visor__item:hover {
+        background: rgba(79, 195, 247, 0.1) !important;
+        transform: translateY(-2px);
+    }
+    
+    .skills-visor__item:hover span {
+        color: #4fc3f7 !important;
+    }
+    
+    .skills-visor__item img[src*="javascript.svg"],
+    .skills-visor__item img[src*="typescript.svg"] {
+        filter: invert(1) brightness(1.2) contrast(1.1);
+    }
+    
+    .skills-visor__item img[src*="python.svg"],
+    .skills-visor__item img[src*="java.svg"],
+    .skills-visor__item img[src*="ruby.svg"] {
+        filter: invert(1) brightness(1.1) contrast(1.2);
+    }
+    
+    .skills-visor__item img[src*="docker.svg"],
+    .skills-visor__item img[src*="kubernetes.svg"] {
+        filter: invert(1) brightness(1.0) contrast(1.3);
+    }
 }

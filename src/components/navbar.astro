@@ -46,6 +46,12 @@ import LanguageSelector from "./language-selector.astro";
       
       <div class="navbar-end">
         <div class="navbar-item">
+          <button id="dark-mode-toggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
+            <span class="dark-mode-icon">🌙</span>
+            <span class="light-mode-icon">☀️</span>
+          </button>
+        </div>
+        <div class="navbar-item">
           <LanguageSelector />
         </div>
       </div>
@@ -225,6 +231,91 @@ import LanguageSelector from "./language-selector.astro";
     }
   }
 
+  /* Dark mode toggle button */
+  .dark-mode-toggle {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    margin-right: 1rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .dark-mode-toggle:hover {
+    background: rgba(50, 115, 220, 0.1);
+    transform: scale(1.05);
+  }
+
+  .dark-mode-toggle .dark-mode-icon,
+  .dark-mode-toggle .light-mode-icon {
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+  }
+
+  .dark-mode-toggle .light-mode-icon {
+    display: none;
+  }
+
+  /* Dark mode active state */
+  html.dark-mode .dark-mode-toggle .dark-mode-icon {
+    display: none;
+  }
+
+  html.dark-mode .dark-mode-toggle .light-mode-icon {
+    display: inline;
+  }
+
+  /* Dark mode styles when manually toggled */
+  html.dark-mode {
+    color-scheme: dark;
+  }
+
+  html.dark-mode .navbar {
+    background: rgba(26, 26, 26, 0.95);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+  }
+
+  html.dark-mode .navbar.scrolled {
+    background: rgba(26, 26, 26, 0.98);
+  }
+
+  html.dark-mode .brand-initials {
+    color: #4fc3f7;
+  }
+
+  html.dark-mode .brand-full {
+    color: #aaa;
+  }
+
+  html.dark-mode .nav-link {
+    color: #e0e0e0;
+  }
+
+  html.dark-mode .nav-link:hover {
+    color: #4fc3f7;
+    background: rgba(79, 195, 247, 0.1);
+  }
+
+  html.dark-mode .nav-link::after {
+    background: #4fc3f7;
+  }
+
+  html.dark-mode .navbar-burger span {
+    background: #e0e0e0;
+  }
+
+  html.dark-mode .navbar-burger:hover {
+    background: rgba(79, 195, 247, 0.1);
+  }
+
+  html.dark-mode .nav-link.active {
+    color: #4fc3f7;
+    background: rgba(79, 195, 247, 0.1);
+  }
+
   /* Mobile responsiveness */
   @media screen and (max-width: 1023px) {
     .navbar {
@@ -274,6 +365,12 @@ import LanguageSelector from "./language-selector.astro";
     }
   }
 
+  /* Manual dark mode toggle support for mobile */
+  html.dark-mode .navbar-menu {
+    background: rgba(26, 26, 26, 0.98);
+    border-top-color: rgba(255, 255, 255, 0.1);
+  }
+
   /* Smooth scrolling for anchor links */
   html {
     scroll-behavior: smooth;
@@ -312,6 +409,49 @@ import LanguageSelector from "./language-selector.astro";
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
+    // Dark mode toggle functionality
+    const darkModeToggle = document.getElementById('dark-mode-toggle') as HTMLButtonElement;
+    const html = document.documentElement;
+    
+    // Check for saved dark mode preference or default to system preference
+    const savedDarkMode = localStorage.getItem('darkMode');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    if (savedDarkMode !== null) {
+      // Use saved preference
+      if (savedDarkMode === 'true') {
+        html.classList.add('dark-mode');
+      } else {
+        html.classList.remove('dark-mode');
+      }
+    } else {
+      // Use system preference
+      if (prefersDark) {
+        html.classList.add('dark-mode');
+      }
+    }
+    
+    // Toggle dark mode
+    if (darkModeToggle) {
+      darkModeToggle.addEventListener('click', () => {
+        html.classList.toggle('dark-mode');
+        const isDark = html.classList.contains('dark-mode');
+        localStorage.setItem('darkMode', isDark.toString());
+      });
+    }
+    
+    // Listen for system preference changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      // Only update if user hasn't set a manual preference
+      if (localStorage.getItem('darkMode') === null) {
+        if (e.matches) {
+          html.classList.add('dark-mode');
+        } else {
+          html.classList.remove('dark-mode');
+        }
+      }
+    });
+
     // Mobile burger menu functionality
     const $navbarBurgers = Array.prototype.slice.call(
       document.querySelectorAll(".navbar-burger"),

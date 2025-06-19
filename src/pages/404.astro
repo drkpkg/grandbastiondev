@@ -35,4 +35,32 @@ import bastionLogoDestroyed from "../static/images/bastion_404.jpeg";
         height: auto;
         border-radius: 50%;
     }
+
+    /* Dark mode support */
+    @media (prefers-color-scheme: dark) {
+        .error-container {
+            background-color: #1a1a1a;
+        }
+        
+        .error-title {
+            color: #f5f5f5;
+        }
+        
+        .error-message {
+            color: #e0e0e0;
+        }
+    }
+
+    /* Manual dark mode toggle support */
+    html.dark-mode .error-container {
+        background-color: #1a1a1a;
+    }
+    
+    html.dark-mode .error-title {
+        color: #f5f5f5;
+    }
+    
+    html.dark-mode .error-message {
+        color: #e0e0e0;
+    }
 </style>
